@@ -1,4 +1,4 @@
-# photo_gallery
+# Anton Gordievsky's test work
 
 ## Project setup
 ```

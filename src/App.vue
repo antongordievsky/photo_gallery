@@ -1,28 +1,50 @@
+<script lang="ts">
+    import Vue from "vue";
+    import Navbar from "@/layouts/Navbar.vue";
+    import MainContent from "@/layouts/MainContent.vue";
+    import AuthorizeService from "@/domains/user/services/AuthorizeService";
+    import EventBus from "@/assets/support/EventBus";
+
+    export default Vue.extend({
+        name: 'App',
+        components: {
+            Navbar,
+            MainContent,
+        },
+        data() {
+            return {
+                isAuthorized: false as boolean,
+            };
+        },
+        mounted() {
+            AuthorizeService
+                .auth(this.$store.state.user.apiKey)
+                .then(token => {
+                    this.$store.commit('user/setIsAuthorized');
+                    this.$store.commit('user/setToken', token);
+
+                    EventBus.$emit('authorization-successful');
+                });
+        },
+    })
+</script>
+
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <navbar></navbar>
+    <div class="section main-container is-white">
+      <div class="tile is-ancestor">
+        <div class="tile is-12">
+          <main-content></main-content>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
-
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  .main-container {
+    margin-top: 53px;
+    height: calc(100vh - 54px);
+  }
 </style>
