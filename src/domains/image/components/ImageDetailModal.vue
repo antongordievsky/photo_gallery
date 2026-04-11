@@ -33,7 +33,7 @@
                 this.loading = true;
 
                 ImageService
-                    .getImage(this.$store.state.user.token, imageId)
+                    .getImage(imageId)
                     .then(image => {
                         this.image = image;
                     })
@@ -48,7 +48,7 @@
 <template>
   <base-modal>
     <p class="image">
-      <img :src="image.full_picture" alt="">
+      <img :src="image.fullPicture" alt="">
     </p>
     <div class="image-details">
       <table>

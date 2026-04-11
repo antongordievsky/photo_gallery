@@ -18,18 +18,15 @@
             };
         },
         mounted(): void {
-            EventBus.$on('authorization-successful', () => {
-                this.loadImages();
-            });
-
             this.setOnScrollCallback(this.loadImages);
+            this.loadImages();
         },
         methods: {
             loadImages() {
                 this.pagination.loading = true;
 
                 ImageService
-                    .getImages(this.$store.state.user.token, this.pagination.page)
+                    .getImages(this.pagination.page)
                     .then(result => {
                         if (this.pagination.page === 1) {
                             this.images = result.pictures;
@@ -65,7 +62,7 @@
               v-for="image in images"
               @click="openDetailsModal(image.id)"
               :image="image"
-              :key="image.imdbID"
+              :key="image.id"
       ></image-card>
     </div>
   </div>

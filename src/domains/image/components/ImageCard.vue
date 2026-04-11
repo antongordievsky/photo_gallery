@@ -16,7 +16,7 @@
 <template>
   <div @click="$emit('click', $event)" class="card image-card">
     <div class="card-image">
-      <img :src="image.cropped_picture" class="image-card-image" alt="image Poster">
+      <img :src="image.croppedPicture" class="image-card-image" alt="image Poster">
     </div>
 
     <div class="card-content">
