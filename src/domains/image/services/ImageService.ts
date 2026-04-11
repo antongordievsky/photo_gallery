@@ -27,7 +27,7 @@ function mapToDetail(p: PicsumPhoto): ImageDetail {
         croppedPicture: `https://picsum.photos/id/${id}/300/300`,
         author: p.author,
         camera: '—',
-        fullicture: p.download_url,
+        fullPicture: p.download_url,
         tags: `${p.width}×${p.height} · ${p.url}`,
     };
 }
